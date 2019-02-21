@@ -1,0 +1,77 @@
+{
+  "name": "json-to-csv-download",
+  "version": "1.0.0",
+  "description": "Easily generate csv downloads of your json data.",
+  "main": "dist/index.js",
+  "files": [
+    "dist/index.js"
+  ],
+  "author": "Coston Perkins <coston.perkins@ua.edu> (https://coston.io)",
+  "homepage": "https://github.com/coston/react-json-2-csv",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coston/react-json-2-csv.git"
+  },
+  "bugs": {
+    "url": "https://github.com/coston/react-json-2-csv/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "mdx-go docs && npm run watch",
+    "docs": "mdx-go build docs -d public",
+    "build": "babel -d dist src --copy-files",
+    "clean": "rm -rf dist && mkdir dist",
+    "watch": "babel -w -d dist src --copy-files",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
+    "start": "npm run build; npm run dev",
+    "preversion": "npm run test && npm run format && npm run clean && npm run build && npm run docs",
+    "postpublish": "git push && git push --tag",
+    "test": "echo 'no tests yet!'",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/jestsetup.js"
+    ],
+    "testURL": "http://localhost/",
+    "collectCoverage": true,
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy"
+    }
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "core-js": "^2.5.7",
+    "coveralls": "^3.0.2",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "enzyme-to-json": "^3.3.4",
+    "identity-obj-proxy": "^3.0.0",
+    "instant-table": "^1.0.5",
+    "jest": "^23.6.0",
+    "mdx-go": "^1.1.11",
+    "prettier": "1.14.3",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-live": "1.12.0",
+    "react-test-renderer": "^16.6.0"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "table"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {}
+}
