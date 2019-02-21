@@ -1,5 +1,5 @@
 {
-  "name": "json-to-csv-download",
+  "name": "json-to-csv-export",
   "version": "1.0.0",
   "description": "Easily generate csv downloads of your json data.",
   "main": "dist/index.js",
@@ -66,9 +66,10 @@
     "react-test-renderer": "^16.6.0"
   },
   "keywords": [
-    "react",
-    "react-component",
-    "table"
+    "json",
+    "csv",
+    "download",
+    "web"
   ],
   "directories": {
     "test": "test"
