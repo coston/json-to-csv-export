@@ -38,10 +38,10 @@ import csvDownload from 'json-to-csv-export'
 
 ## Arguments
 
-| Argument      | Type      | Requirement     | Default | Description                                         |
-| --------- | --------- | ------------ | ------- | --------------------------------------------------- |
-| data     | `object`  | `required` | `null`  | object or array of objects             |
-| filename| `string`  | `optional` | "export.csv"  | The complete filename          |
+|#| Argument      | Type      | Requirement     | Default | Description                                         |
+|-| --------- | --------- | ------------ | ------- | --------------------------------------------------- |
+|1| data     | `object`  | `required` | `null`  | object or array of objects             |
+|2| filename| `string`  | `optional` | "export.csv"  | The complete filename          |
 
 ## Contributing
 
