@@ -38,9 +38,9 @@ import csvDownload from 'json-to-csv-export'
 
 ## Arguments
 
-| Prop      | Type      | Argument     | Default | Description                                         |
+| Argument      | Type      | Requirement     | Default | Description                                         |
 | --------- | --------- | ------------ | ------- | --------------------------------------------------- |
-| data     | `array`  | `required` | `null`  | object or array of objects             |
+| data     | `object`  | `required` | `null`  | object or array of objects             |
 | filename| `string`  | `optional` | "export.csv"  | The complete filename          |
 
 ## Contributing
