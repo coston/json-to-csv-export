@@ -7,13 +7,13 @@
     "dist/index.js"
   ],
   "author": "Coston Perkins <coston.perkins@ua.edu> (https://coston.io)",
-  "homepage": "https://github.com/coston/react-json-2-csv",
+  "homepage": "https://github.com/coston/json-to-csv-export",
   "repository": {
     "type": "git",
-    "url": "https://github.com/coston/react-json-2-csv.git"
+    "url": "https://github.com/coston/json-to-csv-export.git"
   },
   "bugs": {
-    "url": "https://github.com/coston/react-json-2-csv/issues"
+    "url": "https://github.com/coston/json-to-csv-export/issues"
   },
   "license": "MIT",
   "scripts": {
