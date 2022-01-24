@@ -74,3 +74,9 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+# build
+dist/
+
+# demo
+public/
