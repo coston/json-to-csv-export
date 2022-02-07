@@ -1,29 +1,20 @@
 const csvDownload = (data, name, delimiter) => {
-  const { filename, csvString } = jsonToCsv(data, name, delimiter)
-
-  const blob = new Blob([csvString], {
-    type: 'text/plain;charset=utf-8',
-  })
-
-  if (navigator.msSaveBlob) {
-    navigator.msSaveBlob(blob, filename)
-    return
-  }
-
-  const link = document.createElement('a')
-  const url = URL.createObjectURL(blob)
-  link.href = url
-  link.download = filename
-  link.style.display = 'none'
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+  download(jsonToCsv(data, name, delimiter))
 }
+
+export default csvDownload // Keep this as a default export for backwards compat.
 
 export const jsonDownload = (data, name, delimiter) => {
-  const { filename, jsonObject } = csvToJson(data, name, delimiter)
+  download(csvToJson(data, name, delimiter))
+}
 
-  const blob = new Blob([jsonObject], {
+/**
+ * Provide a way to download the converted data
+ * @param {object} {}} 
+ * @returns 
+ */
+export const download = ({filename, object}) => {
+  const blob = new Blob([object], {
     type: 'text/plain;charset=utf-8',
   })
 
@@ -42,9 +33,8 @@ export const jsonDownload = (data, name, delimiter) => {
   document.body.removeChild(link)
 }
 
-export default csvDownload
-
 /**
+ * Provides support for digesting and exporting JSON to CSV
  * 
  * @param {JSON} __data 
  * @param {String} __name 
@@ -67,7 +57,7 @@ export const jsonToCsv = (__data, __name, __delimiter) => {
 
   return {
     filename: filename,
-    csvString: csv,
+    object: csv,
   }
 }
 
@@ -82,7 +72,7 @@ export const csvToJson = (__data, __name, __delimiter) => {
 
   let returnData = {
     filename: null,
-    jsonObject: null,
+    object: null,
     error: null
   }
 
@@ -111,7 +101,7 @@ export const csvToJson = (__data, __name, __delimiter) => {
         object.push(schema)
       })
 
-      returnData.jsonObject = JSON.stringify(object)
+      returnData.object = JSON.stringify(object)
       return returnData 
     } else {
       returnData.error = 'No valid rows in csv data'
