@@ -1,12 +1,8 @@
-const csvDownload = (data, name, delimiter) => {
-  download(jsonToCsv(data, name, delimiter))
-}
+const csvDownload = (data, name, delimiter) => download(jsonToCsv(data, name, delimiter))
 
 export default csvDownload // Keep this as a default export for backwards compat.
 
-export const jsonDownload = (data, name, delimiter) => {
-  download(csvToJson(data, name, delimiter))
-}
+export const jsonDownload = (data, name, delimiter) => download(csvToJson(data, name, delimiter))
 
 /**
  * Provide a way to download the converted data
@@ -69,7 +65,6 @@ export const jsonToCsv = (__data, __name, __delimiter) => {
  * @param {Char} __delimiter 
  */
 export const csvToJson = (__data, __name, __delimiter) => {
-
   let returnData = {
     filename: null,
     object: null,
