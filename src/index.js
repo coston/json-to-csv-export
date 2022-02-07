@@ -53,7 +53,7 @@ export const jsonToCsv = (__data, __name, __delimiter) => {
 
   return {
     filename: filename,
-    object: csv,
+    object: csv
   }
 }
 
