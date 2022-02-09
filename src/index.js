@@ -6,10 +6,14 @@ export const jsonDownload = (data, name, delimiter) => download(csvToJson(data, 
 
 /**
  * Provide a way to download the converted data
- * @param {object} {}} 
+ * @param {object} {}
  * @returns 
  */
-export const download = ({filename, object}) => {
+export const download = ({filename, object, error}) => {
+  if (error && error !== '') {
+    throw new Error(error)
+  }
+
   const blob = new Blob([object], {
     type: 'text/plain;charset=utf-8',
   })
@@ -32,79 +36,82 @@ export const download = ({filename, object}) => {
 /**
  * Provides support for digesting and exporting JSON to CSV
  * 
- * @param {JSON} __data 
- * @param {String} __name 
- * @param {Char} __delimiter 
+ * @param {JSON} data 
+ * @param {String} name 
+ * @param {Char} delimiter 
  * @returns Object
  */
-export const jsonToCsv = (__data, __name, __delimiter) => {
-  const data = __data
-  const filename = __name || `export.csv`
-  const delimiter = __delimiter || `,`
+export const jsonToCsv = (data, name, delimiter) => {
+  try {
+    const content = data
+    const filename = name || `export.csv`
+    const d = delimiter || `,`
 
-  const header = Array.from(
-    new Set(data.reduce((r, e) => [...r, ...Object.keys(e)], []))
-  )
+    const header = Array.from(
+      new Set(content.reduce((r, e) => [...r, ...Object.keys(e)], []))
+    )
 
-  let csv = data.map(row => header.map(fieldName => JSON.stringify(row[fieldName] || '')).join(delimiter))
+    let csv = content.map(row => header.map(fieldName => JSON.stringify(row[fieldName] || '')).join(d))
 
-  csv.unshift(header.join(delimiter))
-  csv = csv.join('\r\n')
+    csv.unshift(header.join(d))
+    csv = csv.join('\r\n')
 
-  return {
-    filename: filename,
-    object: csv
+    return response(filename, csv)
+  } catch (error) {
+    return response(null, null, error.message)
   }
 }
 
 /**
  * This provides support for digesting and exporting CSV data to JSON.
  *  
- * @param {String} __data 
- * @param {String} __name 
- * @param {Char} __delimiter 
+ * @param {String} data 
+ * @param {String} name 
+ * @param {Char} delimiter 
  */
-export const csvToJson = (__data, __name, __delimiter) => {
-  let returnData = {
-    filename: null,
-    object: null,
-    error: null
-  }
-
+export const csvToJson = (data, name, delimiter) => {
   try {
-    const rows = __data.split('\n').filter(_row => _row !== '')
-    const filename = __name || `export.json`
-    const delimiter = __delimiter || `,`
+    const rows = data.split('\n').filter(_row => _row !== '')
+    const filename = name || `export.json`
+    const d = delimiter || `,`
 
     let headers = []
     let object = []
 
-    returnData.filename = filename
-
     if (rows.length > 0) {
-      let schema = {}
-
-      headers = { ...rows[0].split(delimiter) }
+      headers = { ...rows[0].split(d) }
       
       rows.slice(1, rows.length).map(_row => {
         let schema = {}
 
-        _row.split(delimiter).map((_value, _key) => {
+        _row.split(d).map((_value, _key) => {
           schema[headers[_key]] = _value.replace(/["]+/g, '').trim()
         })
         
         object.push(schema)
       })
 
-      returnData.object = JSON.stringify(object)
-      return returnData 
+      return response(filename, JSON.stringify(object))
     } else {
-      returnData.error = 'No valid rows in csv data'
-
-      return returnData
+      throw new Error('No valid rows in csv data')
     }
   } catch (error) {
-    returnData.error = error.message
-    return returnData
+    return response(null, null, error.message)
+  }
+}
+
+/**
+ * Return a uniform response object without writing this for each response.
+ * 
+ * @param {String} filename 
+ * @param {String} object 
+ * @param {String} error 
+ * @returns 
+ */
+const response = (filename, object, error = null) => {
+  return {
+    filename: filename,
+    object: object,
+    error: error
   }
 }
