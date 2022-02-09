@@ -33,19 +33,90 @@ Or load from a CDN:
 
 ## Example Usage
 The first argument is data. This is all that is required.
+
+### JSON to CSV
 ```.jsx
-  <button onClick={() => csvDownload(mockData)}>
-    Download Data
+  <button onClick={() => csvDownload(jsonData)}>
+    Download CSV Data
   </button>
 ```
 
-## Arguments
+### CSV to JSON
+```.jsx
+  <button onClick={() => jsonDownload(csvData)}>
+    Download JSON Data
+  </button>
+```
+
+## API
+
+### csvDownload
+Singular function to convert and download JSON to CSV data. This is shown in an example above.
 
 | #   | Argument  | Type     | Requirement | Default      | Description                |
 | --- | --------- | -------- | ----------- | ------------ | -------------------------- |
 | 1   | data      | `object` | `required`  | `null`       | object or array of objects |
 | 2   | filename  | `string` | `optional`  | "export.csv" | The complete filename      |
 | 3   | delimiter | `string` | `optional`  | ","          | field separator            |
+
+#### returns
+```
+VOID
+```
+
+### jsonDownload
+Singular function to convert and download CSV to JSON data. This is shown in an example above.
+
+| #   | Argument  | Type     | Requirement | Default        | Description                 |
+| --- | --------- | -------- | ----------- | ------------   | --------------------------  |
+| 1   | data      | `string` | `required`  | `null`         | string                      |
+| 2   | filename  | `string` | `optional`  | "export.json"  | The complete filename       |
+| 3   | delimiter | `string` | `optional`  | ","            | field separator             |
+
+#### returns
+```
+VOID
+```
+
+### download({filename, object, error})
+Download any converted data as long as it can be converted into a Blob object.
+
+| #   | Argument  | Type     | Requirement | Description                      |
+| --- | --------- | -------- | ----------- | --------------------------       |
+| 1   | filename  | `string` | `required`  | The filename for the download    |
+| 2   | object    | `any` | `required`     | The 'any' object to be exported |                      |
+| 3   | error     | `string` | `optional`  | Any errors to be reported. This will result in the download being stopped and a new error thrown. This option is used by the csvDownload and jsonDownload functions.            |
+#### returns
+```
+VOID
+```
+
+### csvToJson()
+Convert CSV data into JSON data.
+
+| #   | Argument  | Type     | Requirement | Default        | Description                 |
+| --- | --------- | -------- | ----------- | ------------   | --------------------------  |
+| 1   | data      | `string` | `required`  | `null`         | string                      |
+| 2   | filename  | `string` | `optional`  | "export.json"  | The complete filename       |
+| 3   | delimiter | `string` | `optional`  | ","            | field separator             |
+#### returns
+```
+{ filename:String, object:String, error:String }
+```
+
+### jsonToCsv()
+Convert JSON data into CSV data.
+
+| #   | Argument  | Type     | Requirement | Default      | Description                |
+| --- | --------- | -------- | ----------- | ------------ | -------------------------- |
+| 1   | data      | `object` | `required`  | `null`       | object or array of objects |
+| 2   | filename  | `string` | `optional`  | "export.csv" | The complete filename      |
+| 3   | delimiter | `string` | `optional`  | ","          | field separator            |
+
+#### returns
+```
+{ filename:String, object:String, error:String }
+```
 
 ## Contributing
 

@@ -1,14 +1,15 @@
 // example Root component
 import React from 'react'
 import { StyleProvider } from 'mdx-go'
-import csvDownload from '../src/index'
+import csvDownload, { jsonDownload } from '../src/index'
 import Table from 'instant-table'
-import mockData from './mockData.js'
-
+import { csvData, jsonData } from './mockData.js'
 
 const components = {
   csvDownload,
-  mockData,
+  jsonDownload,
+  jsonData,
+  csvData,
   Table
 }
 
@@ -26,17 +27,17 @@ const theme = {
 
 export const Root = props =>(
   <StyleProvider components={components} theme={theme}>
-  <div style={{
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    paddingLeft: '32px',
-    paddingRight: '32px',
-    paddingTop: '32px',
-    paddingBottom: '32px',
-    maxWidth: '1000px'
-  }}>
-    {props.children}
-  </div>
+    <div style={{
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      paddingLeft: '32px',
+      paddingRight: '32px',
+      paddingTop: '32px',
+      paddingBottom: '32px',
+      maxWidth: '1000px'
+    }}>
+      {props.children}
+    </div>
   
   </StyleProvider>
 )
