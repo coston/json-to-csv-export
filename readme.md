@@ -12,7 +12,8 @@ A function to easily generate csv downloads of your json data. ✨
 
 ## Features
 
-- Create a csv download from json data
+- Create a csv/json download from data
+- Convert json/csv data
 - Lightweight
 - Easy to use
 - optional filename
@@ -34,22 +35,70 @@ Or load from a CDN:
 ## Example Usage
 
 ```html
-import csvDownload from 'json-to-csv-export'
+import csvDownload, { jsonDownload, jsonToCsv, csvToJson } from 'json-to-csv-export'
 
 ...
 
-  <button onClick={() => csvDownload(mockData)}>
-    Download Data
+  <button onClick={() => csvDownload(jsonData)}>
+    Download CSV Data
   </button>
+...
+
+  <code>
+    {jsonToCsv(jsonData).data}
+  </code>
+
+...
+  <button onClick={() => jsonDownload(csvData)}>
+    Download JSON Data
+  </button>
+
+...
+
+  <code>
+    {csvToJson(csvData).data}
+  </code>
 ```
 
-## Arguments
+### Download Arguments
+| #   | Argument  | Type     | Requirement | Default      | Description                       |
+| --- | --------- | -------- | ----------- | ------------ | --------------------------        |
+| 1   | data      | `object` | `required`  | `null`       | string or object                  |
+| 2   | filename  | `string` | `optional`  | "export.[csv\|json]" | The complete filename     |
+| 3   | delimiter | `string` | `optional`  | ","          | field separator                   |
 
-| #   | Argument  | Type     | Requirement | Default      | Description                |
-| --- | --------- | -------- | ----------- | ------------ | -------------------------- |
-| 1   | data      | `object` | `required`  | `null`       | object or array of objects |
-| 2   | filename  | `string` | `optional`  | "export.csv" | The complete filename      |
-| 3   | delimiter | `string` | `optional`  | ","          | field separator            |
+### Converter Arguments
+| #   | Argument  | Type     | Requirement | Default      | Description                       |
+| --- | --------- | -------- | ----------- | ------------ | --------------------------        |
+| 1   | data      | `object` | `required`  | `null`       | string or object                  |
+| 2   | delimiter | `string` | `optional`  | ","          | field separator                   |
+
+### Callable Functions
+#### `csvDownload()`
+Singular function to convert and download JSON to CSV data. This is shown in an example above.
+
+#### `jsonDownload()`
+Singular function to convert and download CSV to JSON data. This is shown in an example above.
+
+#### `csvToJson()`
+Convert CSV data into JSON data.
+<details>
+  <summary>Returns</summary>
+  <br/>
+  <pre font-size="1" p="3" bg="lightgray" class="prism-code css-108ro8y">
+    { data:string, error:string }
+  </pre>
+</details>
+
+#### `jsonToCsv()`
+Convert JSON data into CSV data.
+<details>
+  <summary>Returns</summary>
+  <br/>
+  <pre font-size="1" p="3" bg="lightgray" class="prism-code css-108ro8y">
+    { data:string, error:string }
+  </pre>
+</details>
 
 ## Contributing
 

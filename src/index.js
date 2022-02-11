@@ -1,20 +1,22 @@
-const csvDownload = (data, name, delimiter) => download(jsonToCsv(data, name, delimiter))
+const csvDownload = (data, name, delimiter) => download(name, jsonToCsv(data, delimiter))
 
 export default csvDownload // Keep this as a default export for backwards compat.
 
-export const jsonDownload = (data, name, delimiter) => download(csvToJson(data, name, delimiter))
+export const jsonDownload = (data, name, delimiter) => download(name, csvToJson(data, delimiter))
 
 /**
  * Provide a way to download the converted data
- * @param {object} {}
+ * 
+ * @param {string} filename The name of the export file.
+ * @param {data} {}
  * @returns 
  */
-export const download = ({filename, object, error}) => {
+const download = (filename, {data, error}) => {
   if (error && error !== '') {
     throw new Error(error)
   }
 
-  const blob = new Blob([object], {
+  const blob = new Blob([data], {
     type: 'text/plain;charset=utf-8',
   })
 
@@ -41,10 +43,9 @@ export const download = ({filename, object, error}) => {
  * @param {Char} delimiter 
  * @returns Object
  */
-export const jsonToCsv = (data, name, delimiter) => {
+export const jsonToCsv = (data, delimiter) => {
   try {
     const content = data
-    const filename = name || `export.csv`
     const d = delimiter || `,`
 
     const header = Array.from(
@@ -56,9 +57,9 @@ export const jsonToCsv = (data, name, delimiter) => {
     csv.unshift(header.join(d))
     csv = csv.join('\r\n')
 
-    return response(filename, csv)
+    return response(csv)
   } catch (error) {
-    return response(null, null, error.message)
+    return response(null, error.message)
   }
 }
 
@@ -69,10 +70,9 @@ export const jsonToCsv = (data, name, delimiter) => {
  * @param {String} name 
  * @param {Char} delimiter 
  */
-export const csvToJson = (data, name, delimiter) => {
+export const csvToJson = (data, delimiter) => {
   try {
     const rows = data.split('\n').filter(_row => _row !== '')
-    const filename = name || `export.json`
     const d = delimiter || `,`
 
     let headers = []
@@ -91,27 +91,25 @@ export const csvToJson = (data, name, delimiter) => {
         object.push(schema)
       })
 
-      return response(filename, JSON.stringify(object))
+      return response(JSON.stringify(object))
     } else {
       throw new Error('No valid rows in csv data')
     }
   } catch (error) {
-    return response(null, null, error.message)
+    return response(null, error.message)
   }
 }
 
 /**
  * Return a uniform response object without writing this for each response.
  * 
- * @param {String} filename 
- * @param {String} object 
+ * @param {String} data 
  * @param {String} error 
  * @returns 
  */
-const response = (filename, object, error = null) => {
+const response = (data, error = null) => {
   return {
-    filename: filename,
-    object: object,
+    data: data,
     error: error
   }
 }

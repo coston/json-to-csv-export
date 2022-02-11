@@ -203,8 +203,7 @@ const mockData = [
   }
 ]
 
-const validCsv = `
-id,First Name,Last Name,Email,Gender,IP Address
+const validCsv = `id,First Name,Last Name,Email,Gender,IP Address
 1,"Blanch","Elby","belby0@bing.com","Female","112.81.107.207"
 2,"Gilli","Ebourne","gebourne1@cornell.edu","Female","175.193.73.246"
 3,"Barny","Curzon","bcurzon2@forbes.com","Male","122.156.241.94"
@@ -229,13 +228,11 @@ id,First Name,Last Name,Email,Gender,IP Address
 22,"Wesley","Dursley","wdursleyl@ebay.co.uk","Male","238.109.146.5"
 23,"Margareta","Davioud","mdavioudm@addthis.com","Female","41.94.141.172"
 24,"Trish","Emerson","temersonn@jalbum.net","Female","137.24.161.213"
-25,"Paulie","Steffens","psteffenso@washingtonpost.com","Female","115.83.208.158"
-`
+25,"Paulie","Steffens","psteffenso@washingtonpost.com","Female","115.83.208.158"`.replaceAll('\n', '\r\n')
 
+const { error, data } = jsonToCsv(mockData, ',')
 
-const {filename, object } = jsonToCsv(mockData, 'jest-export.csv', ',')
-
-test('we have the correct filename', () => expect(filename).toBe('jest-export.csv'))
-// test('we have the correct csv data', () => expect(csvString.trim()).toBe(validCsv)) // TODO [BD|02/07/2022] Figure out why the CSV output is always failing.
+test('we have the correct filename', () => expect(error).toBe(null))
+test('we have the correct csv data', () => expect(data).toBe(validCsv)) // TODO [BD|02/07/2022] Figure out why the CSV output is always failing.
 
 export default mockData
