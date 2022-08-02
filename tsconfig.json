@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "allowJs": true,
+    "target": "es2015",
+    "skipLibCheck": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./test/**/*", "./node_modules/**/*"]
+}

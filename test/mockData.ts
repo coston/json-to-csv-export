@@ -1,4 +1,4 @@
-import csvDownload from '../src/index'
+import csvDownload from '../src'
 
 // no tests yet!
 
