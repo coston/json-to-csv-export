@@ -7,7 +7,7 @@ const csvDownload = (data, name, delimiter) => {
     new Set(items.reduce((r, e) => [...r, ...Object.keys(e)], []))
   )
   let csv = items.map(row =>
-    header.map(fieldName => JSON.stringify(row[fieldName] ?? '')).join(d)
+    header.map(fieldName => JSON.stringify(row[fieldName] === 0 ? 0 : (row[fieldName] || ''))).join(d)
   )
   csv.unshift(header.join(d))
   csv = csv.join('\r\n')
