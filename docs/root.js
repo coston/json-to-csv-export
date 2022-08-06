@@ -1,7 +1,7 @@
 // example Root component
 import React from 'react'
 import { StyleProvider } from 'mdx-go'
-import csvDownload from '../src'
+import csvDownload from '../built/index'
 import Table from 'instant-table'
 import mockData from './mockData.js'
 

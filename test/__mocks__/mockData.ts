@@ -1,8 +1,3 @@
-import csvDownload from '../src'
-
-// no tests yet!
-
-
 const mockData = [
   {
     id: 1,

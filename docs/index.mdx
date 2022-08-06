@@ -19,6 +19,7 @@ A function to easily generate csv downloads of your json data. ✨
 - Lightweight
 - Easy to use
 - optional filename
+- optional headers name
 
 ## Install
 
@@ -39,13 +40,14 @@ The first argument is data. This is all that is required.
   </button>
 ```
 
-## Arguments
+## Properties
 
-| #   | Argument  | Type     | Requirement | Default      | Description                |
-| --- | --------- | -------- | ----------- | ------------ | -------------------------- |
-| 1   | data      | `object` | `required`  | `null`       | object or array of objects |
-| 2   | filename  | `string` | `optional`  | "export.csv" | The complete filename      |
-| 3   | delimiter | `string` | `optional`  | ","          | field separator            |
+| #   | Property  | Type         | Requirement | Default                   | Description                                                                   |
+| --- |-----------|--------------| ----------- |---------------------------|-------------------------------------------------------------------------------|
+| 1   | data      | `[]`         | `required`  |                           | array of objects                                                              |
+| 2   | filename  | `string`     | `optional`  | "export.csv"              | The filename. The `.csv` extention will be edded if not included in file name |
+| 3   | delimiter | `string`     | `optional`  | ";"                       | fields separator                                                              |
+| 3   | headers   | `string[]`   | `optional`  | provided data object keys | List of columns that will be used in the final CSV file.                      |
 
 ## Contributing
 

@@ -8,7 +8,7 @@ interface CsvDownloadProps {
 const CSV_FILE_TYPE = 'text/csv;charset=utf-8;';
 const csvDownload = ({
                        data,
-                       filename,
+                       filename, // default to 'export.csv'
                        delimiter = ';',
                        headers,
                      }: CsvDownloadProps): void => {
