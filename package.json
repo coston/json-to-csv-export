@@ -67,8 +67,5 @@
   ],
   "directories": {
     "test": "test"
-  },
-  "dependencies": {
-    "jest-environment-jsdom": "^28.1.3"
   }
 }
