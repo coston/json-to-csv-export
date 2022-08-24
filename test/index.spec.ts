@@ -1,7 +1,7 @@
 import csvDownload from '../src/index';
 import mockData from './__mocks__/mockData';
 
-describe("csvDownload",  () => {
+describe("csvDownload", () => {
 
   const _URL = global.URL
 
@@ -16,11 +16,11 @@ describe("csvDownload",  () => {
     expect(mockData).toHaveLength(25)
   });
 
-  test('init min config', async() => {
+  test('init min config', async () => {
     csvDownload({ data: [] })
   });
 
-  test('with data', async() => {
+  test('with data', async () => {
     let link = undefined
     document.onclick = (e) => {
       link = e.target as HTMLAnchorElement
@@ -28,6 +28,20 @@ describe("csvDownload",  () => {
     csvDownload({ data: mockData })
     expect(link.href).toContain('test/url')
     expect(link.download).toEqual('export.csv')
+  });
+
+  test('with all properties provided', async () => {
+    let link = undefined
+    document.onclick = (e) => {
+      link = e.target as HTMLAnchorElement
+    }
+    csvDownload({
+      data: mockData,
+      headers: ['ID', 'Name', 'Surname', 'E-mail', 'Gender', 'IP'],
+      filename: 'custom-name',
+      delimiter: ','
+    })
+    expect(link.download).toEqual('custom-name.csv')
   });
 })
 

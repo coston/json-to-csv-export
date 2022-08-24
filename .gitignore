@@ -77,10 +77,10 @@ typings/
 
 # build
 dist/
-built/
 
 # demo
 public/
 
 # IDEs
 .idea
+package-lock.json

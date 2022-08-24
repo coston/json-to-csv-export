@@ -18,8 +18,8 @@ A function to easily generate csv downloads of your json data. ✨
 - Create a csv download from json data
 - Lightweight
 - Easy to use
-- optional filename
-- optional headers name
+- Optional filename
+- Optional header names
 
 ## Install
 
@@ -35,7 +35,7 @@ Or load from a CDN:
 ## Example Usage
 The first argument is data. This is all that is required.
 ```.jsx
-  <button onClick={() => csvDownload(mockData)}>
+  <button onClick={() => csvDownload({ data: mockData })}>
     Download Data
   </button>
 ```

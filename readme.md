@@ -17,8 +17,8 @@ A function to easily generate csv downloads of your json data. ✨
 - Create a csv download from json data
 - Lightweight
 - Easy to use
-- optional filename
-- optional headers name
+- Optional filename
+- Optional header names
 
 ## Install
 
@@ -31,7 +31,6 @@ npm i json-to-csv-export
 Or load from a CDN:
 
 ```html
-
 <script src="https://cdn.jsdelivr.net/npm/json-to-csv-export"></script>
 ```
 
@@ -53,7 +52,7 @@ const ipAddressesData = [
   }
 ]
 
-const props = {
+const dataToCovert = {
   data: ipAddressesData,
   filename: 'ip_addresses_report',
   delimiter: ',',
@@ -62,19 +61,19 @@ const props = {
 
 ...
 
-<button onClick={() => csvDownload(data)}>
+<button onClick={() => csvDownload(dataToCovert)}>
 Download Data
 </button>
 ```
 
 ## Properties
 
-| #   | Property  | Type         | Requirement | Default                   | Description                                                                   |
-| --- |-----------|--------------| ----------- |---------------------------|-------------------------------------------------------------------------------|
-| 1   | data      | `[]`         | `required`  |                           | array of objects                                                              |
-| 2   | filename  | `string`     | `optional`  | "export.csv"              | The filename. The `.csv` extention will be edded if not included in file name |
-| 3   | delimiter | `string`     | `optional`  | ";"                       | fields separator                                                              |
-| 3   | headers   | `string[]`   | `optional`  | provided data object keys | List of columns that will be used in the final CSV file.                      |
+| #  | Property  | Type         | Requirement | Default                   | Description                                                                   |
+| -- |-----------|--------------| ----------- |---------------------------|-------------------------------------------------------------------------------|
+| 1  | data      | `[]`         | `required`  |                           | array of objects                                                              |
+| 2  | filename  | `string`     | `optional`  | "export.csv"              | The filename. The `.csv` extention will be edded if not included in file name |
+| 3  | delimiter | `string`     | `optional`  | ";"                       | fields separator                                                              |
+| 4  | headers   | `string[]`   | `optional`  | provided data object keys | List of columns that will be used in the final CSV file.                      |
 
 ## Migration from version 1.x to 2.x
 [migration.md](migration.md)
