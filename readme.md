@@ -52,7 +52,7 @@ const ipAddressesData = [
   }
 ]
 
-const dataToCovert = {
+const dataToConvert = {
   data: ipAddressesData,
   filename: 'ip_addresses_report',
   delimiter: ',',
@@ -61,7 +61,7 @@ const dataToCovert = {
 
 ...
 
-<button onClick={() => csvDownload(dataToCovert)}>
+<button onClick={() => csvDownload(dataToConvert)}>
 Download Data
 </button>
 ```
