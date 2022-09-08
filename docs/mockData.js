@@ -77,7 +77,7 @@ const mockData = [
     "Last Name": "Gaither",
     "Email": "vgaither9@trellian.com",
     "Language": "Persian",
-    "IP Address": "200.55.200.251"
+    "IP Address": "0" // to test 0 handling
   }
 ]
 

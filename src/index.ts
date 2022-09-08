@@ -8,7 +8,7 @@ interface CsvDownloadProps {
 const CSV_FILE_TYPE = 'text/csv;charset=utf-8;'
 const csvDownload = ({
   data,
-  filename, // default to 'export.csv'
+  filename = 'export.csv',
   delimiter = ';',
   headers,
 }: CsvDownloadProps): void => {
@@ -28,7 +28,7 @@ const csvDownload = ({
   const columnNames = headers ?? headerKeys
   const csv = items.map((row) =>
     headerKeys
-      .map((fieldName) => JSON.stringify(row[fieldName] ?? ''))
+      .map((fieldName) => JSON.stringify(row[fieldName] === 0 ? 0 : (row[fieldName] ?? '')))
       .join(delimiter)
   )
   csv.unshift(columnNames.join(delimiter))
@@ -50,12 +50,8 @@ const triggerCsvDownload = (csvAsString: string, fileName: string) => {
   document.body.removeChild(link)
 }
 
-const getFilename = (providedFilename?: string): string => {
-  return providedFilename
-    ? providedFilename.toLowerCase().endsWith('.csv')
-      ? providedFilename
-      : `${providedFilename}.csv`
-    : 'export.csv'
+const getFilename = (providedFilename: string): string => {
+  return /csv$/i.test(providedFilename) ? providedFilename : `${providedFilename}.csv`
 }
 
 export default csvDownload

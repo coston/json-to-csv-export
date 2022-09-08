@@ -1,8 +1,10 @@
 # Migration from 1.x.x to 2.x
 
-## Reason for migration
+## Breaking Changes
 
-New version was written in TS and a bit changed the arguments list to make it more convenient and flexible
+* Named parameters are now required for passing custom `data`, `filename`, and `delimeter` props.
+* Support for the IE `navigator.msSaveBlob` method was removed from the code (as it was removed in new versions of TypeScript).
+* File name can be provided without `.csv` extension, it will be added automatically
 
 ## Steps
 

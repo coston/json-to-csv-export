@@ -56,7 +56,7 @@ const dataToConvert = {
   data: ipAddressesData,
   filename: 'ip_addresses_report',
   delimiter: ',',
-  headers: ['IP', "Full Name", "# Address"]
+  headers: ['IP', "Full Name", "IP Address"]
 }
 
 ...
