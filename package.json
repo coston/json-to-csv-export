@@ -17,11 +17,11 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "npm run build && mdx-go docs && npm run watch",
+    "dev": "npm run build && mdx-go docs & npm run watch",
     "docs": "npm run build && mdx-go build docs -d public",
     "build": "tsc",
     "clean": "rm -rf dist",
-    "watch": "babel --watch src --out-dir dist --extensions '.ts'",
+    "watch": "tsc --watch",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.ts'",
     "start": "npm run build; npm run dev",
     "preversion": "npm run test && npm run format && npm run clean && npm run build && npm run docs",
