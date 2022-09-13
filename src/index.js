@@ -1,4 +1,4 @@
-const csvDownload = (data, name, delimiter, hideFirstRow) => {
+const csvDownload = (data, name, delimiter, hideFirstRow = false) => {
   const items = data
   const filename = name || `export.csv`
   const d = delimiter || `,`
