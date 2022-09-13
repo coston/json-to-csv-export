@@ -80,3 +80,6 @@ dist/
 
 # demo
 public/
+
+# IDEs
+.idea

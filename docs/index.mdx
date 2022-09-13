@@ -18,7 +18,8 @@ A function to easily generate csv downloads of your json data. ✨
 - Create a csv download from json data
 - Lightweight
 - Easy to use
-- optional filename
+- Optional filename
+- Optional header names
 
 ## Install
 
@@ -34,18 +35,19 @@ Or load from a CDN:
 ## Example Usage
 The first argument is data. This is all that is required.
 ```.jsx
-  <button onClick={() => csvDownload(mockData)}>
+  <button onClick={() => csvDownload({ data: mockData })}>
     Download Data
   </button>
 ```
 
-## Arguments
+## Properties
 
-| #   | Argument  | Type     | Requirement | Default      | Description                |
-| --- | --------- | -------- | ----------- | ------------ | -------------------------- |
-| 1   | data      | `object` | `required`  | `null`       | object or array of objects |
-| 2   | filename  | `string` | `optional`  | "export.csv" | The complete filename      |
-| 3   | delimiter | `string` | `optional`  | ","          | field separator            |
+| #   | Property  | Type         | Requirement | Default                   | Description                                                                   |
+| --- |-----------|--------------| ----------- |---------------------------|-------------------------------------------------------------------------------|
+| 1   | data      | `[]`         | `required`  |                           | array of objects                                                              |
+| 2   | filename  | `string`     | `optional`  | "export.csv"              | The filename. The `.csv` extention will be edded if not included in file name |
+| 3   | delimiter | `string`     | `optional`  | ";"                       | fields separator                                                              |
+| 4   | headers   | `string[]`   | `optional`  | provided data object keys | List of column names that will be used in the final CSV file.                      |
 
 ## Contributing
 
