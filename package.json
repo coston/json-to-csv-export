@@ -22,7 +22,7 @@
     "build": "tsc",
     "clean": "rm -rf dist",
     "watch": "tsc --watch",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.ts'",
+    "format": "prettier --write 'src/**/*.ts'",
     "start": "npm run build; npm run dev",
     "preversion": "npm run test && npm run format && npm run clean && npm run build && npm run docs",
     "postpublish": "git push && git push --tag",
