@@ -1,4 +1,4 @@
-const csvDownload = (data, name, delimiter) => {
+const csvDownload = (data, name, delimiter, hideFirstRow) => {
   const items = data
   const filename = name || `export.csv`
   const d = delimiter || `,`
@@ -13,7 +13,9 @@ const csvDownload = (data, name, delimiter) => {
       )
       .join(d)
   )
-  csv.unshift(header.join(d))
+  if (!hideFirstRow) {
+    csv.unshift(header.join(d))
+  }
   csv = csv.join('\r\n')
 
   const blob = new Blob([csv], {
