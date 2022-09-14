@@ -2,10 +2,12 @@
   "name": "json-to-csv-export",
   "version": "2.0.1",
   "description": "Easily generate csv downloads of your json data.",
-  "main": "dist/index.js",
   "files": [
-    "dist/index.js"
+    "/lib"
   ],
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
   "author": "Coston Perkins <coston.perkins@ua.edu> (https://coston.io)",
   "homepage": "https://github.com/coston/json-to-csv-export",
   "repository": {
@@ -19,8 +21,10 @@
   "scripts": {
     "dev": "npm run build && mdx-go docs & npm run watch",
     "docs": "npm run build && mdx-go build docs -d public",
-    "build": "tsc",
-    "clean": "rm -rf dist",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "clean": "rm -rf lib",
     "watch": "tsc --watch",
     "format": "prettier --write 'src/**/*.ts'",
     "start": "npm run build; npm run dev",
@@ -33,6 +37,7 @@
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",
+    "@types/jsdom": "^20.0.0",
     "core-js": "^2.5.7",
     "coveralls": "^3.0.2",
     "enzyme": "^3.7.0",
