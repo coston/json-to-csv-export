@@ -38,7 +38,10 @@ const csvDownload = ({
 };
 
 const triggerCsvDownload = (csvAsString: string, fileName: string) => {
-  const blob = new Blob([csvAsString], {
+  // BOM support for special characters in Excel
+  const byteOrderMark = "\ufeff";
+
+  const blob = new Blob([byteOrderMark, csvAsString], {
     type: CSV_FILE_TYPE,
   });
 
