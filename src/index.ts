@@ -1,3 +1,7 @@
+import {
+  csvGenerate
+} from './generate';
+
 interface CsvDownloadProps {
   data: any[];
   filename?: string;
@@ -6,6 +10,7 @@ interface CsvDownloadProps {
 }
 
 const CSV_FILE_TYPE = "text/csv;charset=utf-8;";
+
 const csvDownload = ({
   data,
   filename = "export.csv",
@@ -22,18 +27,8 @@ const csvDownload = ({
     return;
   }
 
-  const headerKeys = Object.keys(data[0]);
+  const csvAsString = csvGenerate(data, headers, delimiter);
 
-  const columnNames = headers ?? headerKeys;
-  const csv = data.map((row) =>
-    headerKeys
-      .map((fieldName) =>
-        JSON.stringify(row[fieldName] === 0 ? 0 : row[fieldName] ?? "")
-      )
-      .join(delimiter)
-  );
-  csv.unshift(columnNames.join(delimiter));
-  const csvAsString = csv.join("\r\n");
   triggerCsvDownload(csvAsString, formattedFilename);
 };
 
