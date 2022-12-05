@@ -3,11 +3,13 @@ export const csvGenerateRow = (
   headerKeys: string[],
   delimiter: string
 ) =>
-  headerKeys.map(
-    (fieldName) => typeof row[fieldName] === 'number'
-      ? row[fieldName]
-      : `"${String(row[fieldName]).replace(/"/g, '""')}"`
-  ).join(delimiter);
+  headerKeys
+    .map((fieldName) =>
+      typeof row[fieldName] === "number"
+        ? row[fieldName]
+        : `"${String(row[fieldName]).replace(/"/g, '""')}"`
+    )
+    .join(delimiter);
 
 export const csvGenerate = (
   data: any[],
@@ -16,9 +18,7 @@ export const csvGenerate = (
 ) => {
   const headerKeys = Object.keys(data[0]);
   const columnNames = headers ?? headerKeys;
-  const csv = data.map(
-    (row) => csvGenerateRow(row, headerKeys, delimiter)
-  );
+  const csv = data.map((row) => csvGenerateRow(row, headerKeys, delimiter));
 
   csv.unshift(columnNames.join(delimiter));
 

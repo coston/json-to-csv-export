@@ -1,6 +1,4 @@
-import {
-  csvGenerate
-} from './generate';
+import { csvGenerate } from "./generate";
 
 interface CsvDownloadProps {
   data: any[];
