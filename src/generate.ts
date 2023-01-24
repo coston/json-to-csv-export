@@ -21,6 +21,6 @@ export const csvGenerate = (
   const csv = data.map((row) => csvGenerateRow(row, headerKeys, delimiter));
 
   csv.unshift(columnNames.join(delimiter));
-
-  return csv.join("\r\n");
+  const separatorMetadata = "sep=" + delimiter;
+  return separatorMetadata + csv.join("\r\n");
 };
