@@ -40,6 +40,7 @@ describe("csvDownload", () => {
       headers: ["ID", "Name", "Surname", "E-mail", "Gender", "IP"],
       filename: "custom-name",
       delimiter: ",",
+      columnsToIgnore: ["Gender"],
     });
     expect(link.download).toEqual("custom-name.csv");
   });
