@@ -5,6 +5,11 @@ interface CsvDownloadProps {
   filename?: string;
   delimiter?: string;
   headers?: string[];
+  columnsToIgnore?: string[];
+}
+
+interface ObjectType {
+  [key: string]: any;
 }
 
 const CSV_FILE_TYPE = "text/csv;charset=utf-8;";
@@ -14,6 +19,7 @@ const csvDownload = ({
   filename = "export.csv",
   delimiter = ";",
   headers,
+  columnsToIgnore
 }: CsvDownloadProps): void => {
   const formattedFilename = getFilename(filename);
 
@@ -25,7 +31,20 @@ const csvDownload = ({
     return;
   }
 
-  const csvAsString = csvGenerate(data, headers, delimiter);
+  function removeColumns<T extends ObjectType>(objects: T[], keysToRemove: (keyof T)[]) {
+    return objects.map(obj => {
+      const newObj = {} as T;
+      Object.entries(obj).forEach(([key, value]) => {
+        if (!keysToRemove.includes(key as keyof T)) {
+          newObj[key] = value;
+        }
+      });
+      return newObj;
+    });
+  }
+
+  const filteredData = columnsToIgnore ? removeColumns(data, columnsToIgnore) : data;
+  const csvAsString = csvGenerate(filteredData, headers, delimiter);
 
   triggerCsvDownload(csvAsString, formattedFilename);
 };

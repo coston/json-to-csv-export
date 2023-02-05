@@ -19,6 +19,7 @@ A function to easily generate csv downloads of your json data. ✨
 - Easy to use
 - Optional filename
 - Optional header names
+- Optional column-ignore
 
 ## Install
 
@@ -56,7 +57,8 @@ const dataToConvert = {
   data: ipAddressesData,
   filename: 'ip_addresses_report',
   delimiter: ',',
-  headers: ['IP', "Full Name", "IP Address"]
+  headers: ['IP', "Full Name", "IP Address"],
+  columnsToIgnore: ["ip"]
 }
 
 ...
@@ -74,6 +76,7 @@ Download Data
 | 2  | filename  | `string`     | `optional`  | "export.csv"              | The filename. The `.csv` extention will be edded if not included in file name |
 | 3  | delimiter | `string`     | `optional`  | ";"                       | fields separator                                                              |
 | 4  | headers   | `string[]`   | `optional`  | provided data object keys | List of columns that will be used in the final CSV file.                      |
+| 5   | columnsToIgnore | `string[]` | `optional` | `[]`                      | List of columns to be ignored in the final CSV file.                          |
 
 ## Migration from version 1.x to 2.x
 [migration.md](migration.md)
