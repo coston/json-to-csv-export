@@ -19,7 +19,7 @@ const csvDownload = ({
   filename = "export.csv",
   delimiter = ";",
   headers,
-  columnsToIgnore
+  columnsToIgnore,
 }: CsvDownloadProps): void => {
   const formattedFilename = getFilename(filename);
 
@@ -31,19 +31,24 @@ const csvDownload = ({
     return;
   }
 
-  function removeColumns<T extends ObjectType>(objects: T[], keysToRemove: (keyof T)[]) {
-    return objects.map(obj => {
+  function removeColumns<T extends ObjectType>(
+    objects: T[],
+    keysToRemove: (keyof T)[]
+  ) {
+    return objects.map((obj) => {
       const newObj = {} as T;
       Object.entries(obj).forEach(([key, value]) => {
         if (!keysToRemove.includes(key as keyof T)) {
-          newObj[key] = value;
+          newObj[key as keyof T] = value;
         }
       });
       return newObj;
     });
   }
 
-  const filteredData = columnsToIgnore ? removeColumns(data, columnsToIgnore) : data;
+  const filteredData = columnsToIgnore
+    ? removeColumns(data, columnsToIgnore)
+    : data;
   const csvAsString = csvGenerate(filteredData, headers, delimiter);
 
   triggerCsvDownload(csvAsString, formattedFilename);
