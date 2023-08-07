@@ -18,7 +18,9 @@
     "url": "https://github.com/coston/json-to-csv-export/issues"
   },
   "license": "MIT",
-
+  "engines" : {
+    "node" : ">=16.0.0"
+  },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
