@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=12.17.0"
   },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
