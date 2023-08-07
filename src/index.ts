@@ -20,7 +20,7 @@ const csvDownload = ({
   if (data.length === 0) {
     triggerCsvDownload(
       headers ? headers.join(delimiter) : "",
-      formattedFilename
+      formattedFilename,
     );
     return;
   }

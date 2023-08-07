@@ -81,6 +81,7 @@ lib/
 
 # demo
 public/
+out/
 
 # IDEs
 .idea
