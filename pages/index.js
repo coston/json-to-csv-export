@@ -3,7 +3,7 @@ import React from "react";
 import Head from "next/head";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 
-import csvDownload from "../lib/esm";
+import jsonToCsvExport from "../lib/esm";
 import mockData from "../docs/mockData";
 
 const App = () => {
@@ -50,7 +50,7 @@ const App = () => {
         <LiveProvider
           code={demoCode}
           scope={{
-            csvDownload,
+            jsonToCsvExport,
             mockData,
           }}
         >
@@ -91,24 +91,18 @@ const App = () => {
         <div>
           <ol>
             <li>
-              <code>
-                import {`{Table, Thead, Tbody, Tr, Th, Td}`} from '
-                json-to-csv-export '
-              </code>
+              <code>import jsonToCsvExport from 'json-to-csv-export'</code>
             </li>
             <li>
-              <code>
-                import ' json-to-csv-export /dist/SuperResponsiveTableStyle.css'
-              </code>
+              Use <code>jsonToCsvExport</code> to download your JSON as a CSV!
             </li>
-            <li>Write your html table with the imported components</li>
           </ol>
         </div>
 
         <h2>Github</h2>
         <p>
           <a
-            href="https://github.com/ua-oira/
+            href="https://github.com/coston/
 json-to-csv-export "
           >
             View project on GitHub
@@ -142,7 +136,8 @@ const theme /*: PrismTheme */ = {
   ],
 };
 
-const demoCode = `() => {
+const demoCode = `
+() => {
   const mockData = [{
     "ID": 1,
     "First Name": "Sarajane",
@@ -161,8 +156,8 @@ const demoCode = `() => {
   }]
 
   return (
-    <button onClick={() => csvDownload({ data: mockData })}>
-    Download Data
-  </button>
+    <button onClick={() => jsonToCsvExport({ data: mockData })}>
+      Download Data
+    </button>
   )
 }`;

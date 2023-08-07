@@ -37,7 +37,7 @@ Or load from a CDN:
 ## Example Usage
 
 ```html
-import csvDownload from 'json-to-csv-export'
+import jsonToCsvExport from 'json-to-csv-export'
 
 const ipAddressesData = [
   {
@@ -61,7 +61,7 @@ const dataToConvert = {
 
 ...
 
-<button onClick={() => csvDownload(dataToConvert)}>
+<button onClick={() => jsonToCsvExport(dataToConvert)}>
 Download Data
 </button>
 ```
