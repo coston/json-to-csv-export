@@ -10,7 +10,7 @@ A function to easily generate csv downloads of your json data. ✨
 
 ## Live Demo
 
-[https://github.com/coston/json-to-csv-export](https://github.com/coston/json-to-csv-export)
+[https://json-to-csv-export.vercel.app/](https://json-to-csv-export.vercel.app/)
 
 ## Features
 
