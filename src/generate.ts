@@ -1,20 +1,20 @@
 export const csvGenerateRow = (
   row: any,
   headerKeys: string[],
-  delimiter: string
+  delimiter: string,
 ) =>
   headerKeys
     .map((fieldName) =>
       typeof row[fieldName] === "number"
         ? row[fieldName]
-        : `"${String(row[fieldName]).replace(/"/g, '""')}"`
+        : `"${String(row[fieldName]).replace(/"/g, '""')}"`,
     )
     .join(delimiter);
 
 export const csvGenerate = (
   data: any[],
   headers: string[] | undefined,
-  delimiter: string
+  delimiter: string,
 ) => {
   const headerKeys = Object.keys(data[0]);
   const columnNames = headers ?? headerKeys;
