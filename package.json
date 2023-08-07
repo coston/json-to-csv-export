@@ -20,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm run build && next dev & npm run watch",
-    "docs": "next build && next export",
+    "docs": "npm run build; next build && next export",
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
