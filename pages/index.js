@@ -101,10 +101,7 @@ const App = () => {
 
         <h2>Github</h2>
         <p>
-          <a
-            href="https://github.com/coston/
-json-to-csv-export "
-          >
+          <a href="https://github.com/coston/json-to-csv-export">
             View project on GitHub
           </a>
         </p>
