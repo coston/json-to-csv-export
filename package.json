@@ -18,21 +18,22 @@
     "url": "https://github.com/coston/json-to-csv-export/issues"
   },
   "license": "MIT",
+
   "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build:esm": "tsc",
+    "clean": "rm -rf lib",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "dev": "npm run build && next dev & npm run watch",
     "docs": "npm run build; next build && next export",
-    "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
-    "clean": "rm -rf lib",
     "format": "prettier --write 'src/**/*.ts'",
-    "start": "npm run build; npm run dev",
-    "preversion": "npm run test && npm run format && npm run clean && npm run build && npm run docs",
     "postpublish": "git push && git push --tag",
+    "preversion": "npm run test && npm run format && npm run clean && npm run build && npm run docs",
+    "start": "npm run build; npm run dev",
     "test": "jest",
-    "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "test:watch": "jest --watch",
     "watch": "tsc --watch"
   },
   "devDependencies": {
