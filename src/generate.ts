@@ -19,8 +19,8 @@ export const csvGenerate = (
   const headerKeys = Object.keys(data[0]);
   const columnNames = headers ?? headerKeys;
   const csv = data.map((row) => csvGenerateRow(row, headerKeys, delimiter));
-
   csv.unshift(columnNames.join(delimiter));
+  csv.unshift(`sep=${delimiter}`);
 
   return csv.join("\r\n");
 };
