@@ -3,6 +3,7 @@ import { csvGenerate } from "./generate";
 interface CsvDownloadProps {
   data: any[];
   filename?: string;
+  /** Cell delimiter to use. Defaults to comma for RFC-4180 compliance. */
   delimiter?: string;
   headers?: string[];
 }
@@ -12,7 +13,7 @@ const CSV_FILE_TYPE = "text/csv;charset=utf-8;";
 const csvDownload = ({
   data,
   filename = "export.csv",
-  delimiter = ";",
+  delimiter = ",",
   headers,
 }: CsvDownloadProps): void => {
   const formattedFilename = getFilename(filename);
