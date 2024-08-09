@@ -37,45 +37,28 @@ Or load from a CDN:
 ## Example Usage
 
 ```html
-import jsonToCsvExport from 'json-to-csv-export'
+import jsonToCsvExport from 'json-to-csv-export' const ipAddressesData = [ { id:
+"1", name: "Sarajane Wheatman", ip: "40.98.252.240" }, { id: "2", name: "Linell
+Humpherston", ip: "82.225.151.150" } ] const dataToConvert = { data:
+ipAddressesData, filename: 'ip_addresses_report', delimiter: ',', headers:
+['IP', "Full Name", "IP Address"] } ...
 
-const ipAddressesData = [
-  {
-    id: "1",
-    name: "Sarajane Wheatman",
-    ip: "40.98.252.240"
-  },
-  {
-    id: "2",
-    name: "Linell Humpherston",
-    ip: "82.225.151.150"
-  }
-]
-
-const dataToConvert = {
-  data: ipAddressesData,
-  filename: 'ip_addresses_report',
-  delimiter: ',',
-  headers: ['IP', "Full Name", "IP Address"]
-}
-
-...
-
-<button onClick={() => jsonToCsvExport(dataToConvert)}>
-Download Data
+<button onClick="{()" ="">
+  jsonToCsvExport(dataToConvert)}> Download Data
 </button>
 ```
 
 ## Properties
 
-| #  | Property  | Type         | Requirement | Default                   | Description                                                                   |
-| -- |-----------|--------------| ----------- |---------------------------|-------------------------------------------------------------------------------|
-| 1  | data      | `[]`         | `required`  |                           | array of objects                                                              |
-| 2  | filename  | `string`     | `optional`  | "export.csv"              | The filename. The `.csv` extention will be added if not included in file name |
-| 3  | delimiter | `string`     | `optional`  | ","                       | fields separator                                                              |
-| 4  | headers   | `string[]`   | `optional`  | provided data object keys | List of columns that will be used in the final CSV file.                      |
+| #   | Property  | Type       | Requirement | Default                   | Description                                                                              |
+| --- | --------- | ---------- | ----------- | ------------------------- | ---------------------------------------------------------------------------------------- |
+| 1   | data      | `[]`       | `required`  |                           | array of objects                                                                         |
+| 2   | filename  | `string`   | `optional`  | "export.csv"              | The filename. The `.csv` extention will be added if not included in file name            |
+| 3   | delimiter | `string`   | `optional`  | ","                       | fields separator                                                                         |
+| 4   | headers   | `string[]` | `optional`  | provided data object keys | List of columns that will be used in the final CSV file. Recommended for large datasets! |
 
 ## Migration from version 1.x to 2.x
+
 [migration.md](migration.md)
 
 ## Contributing
