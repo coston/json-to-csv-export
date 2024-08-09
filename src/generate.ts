@@ -45,11 +45,10 @@ export const csvGenerate = (
   headers: string[] | undefined,
   delimiter: string
 ) => {
-  const allKeys = getAllUniqueKeys(data);
-  const columnNames = headers ?? allKeys;
-  const csv = data.map((row) => csvGenerateRow(row, allKeys, delimiter));
+  const headerKeys = headers ?? getAllUniqueKeys(data);
+  const csv = data.map((row) => csvGenerateRow(row, headerKeys, delimiter));
 
-  csv.unshift(columnNames.join(delimiter));
+  csv.unshift(headerKeys.join(delimiter));
 
   return csv.join("\r\n");
 };

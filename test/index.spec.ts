@@ -2,7 +2,10 @@ import csvDownload from "../src/index";
 import mockData from "./__mocks__/mockData";
 
 // current version of JSDom doesn't support Blob.text(), so this is a FileReader-based workaround.
-const getBlobAsText = async (blob: Blob, encoding = "text/csv;charset=utf-8;"): Promise<string> => {
+const getBlobAsText = async (
+  blob: Blob,
+  encoding = "text/csv;charset=utf-8;"
+): Promise<string> => {
   const fileReader = new FileReader();
   return new Promise((resolve) => {
     fileReader.onload = () => {
@@ -22,7 +25,7 @@ describe("csvDownload", () => {
       capturedBlob = blob;
       return "test/url";
     };
-  })
+  });
 
   beforeEach(() => {
     document.onclick = (e) => {
@@ -49,21 +52,44 @@ describe("csvDownload", () => {
     expect(link.download).toEqual("export.csv");
     expect(capturedBlob).not.toBe(null);
     const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
-    expect(generatedCsvString.startsWith(`id,First Name,Last Name,Email,Gender,IP Address`)).toBeTruthy();
-    expect(generatedCsvString.includes(`1,Blanch,Elby,belby0@bing.com,Female,112.81.107.207`)).toBeTruthy();
+    expect(
+      generatedCsvString.startsWith(
+        `id,First Name,Last Name,Email,Gender,IP Address`
+      )
+    ).toBeTruthy();
+    expect(
+      generatedCsvString.includes(
+        `1,Blanch,Elby,belby0@bing.com,Female,112.81.107.207`
+      )
+    ).toBeTruthy();
   });
 
   test("with all properties provided", async () => {
     csvDownload({
       data: mockData,
-      headers: ["ID", "Name", "Surname", "E-mail", "Gender", "IP"],
+      headers: [
+        "id",
+        "First Name",
+        "Last Name",
+        "Email",
+        "Gender",
+        "IP Address",
+      ],
       filename: "custom-name",
       delimiter: ";",
     });
     expect(link.download).toEqual("custom-name.csv");
     expect(capturedBlob).not.toBe(null);
     const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
-    expect(generatedCsvString.startsWith(`ID;Name;Surname;E-mail;Gender;IP`)).toBeTruthy();
-    expect(generatedCsvString.includes(`1;Blanch;Elby;belby0@bing.com;Female;112.81.107.207`)).toBeTruthy();
+    expect(
+      generatedCsvString.startsWith(
+        `id;First Name;Last Name;Email;Gender;IP Address`
+      )
+    ).toBeTruthy();
+    expect(
+      generatedCsvString.includes(
+        `1;Blanch;Elby;belby0@bing.com;Female;112.81.107.207`
+      )
+    ).toBeTruthy();
   });
 });
