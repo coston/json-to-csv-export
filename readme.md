@@ -41,13 +41,17 @@ import jsonToCsvExport from 'json-to-csv-export'
 
 const ipAddressesData = [ { id:
 "1", name: "Sarajane Wheatman", ip: "40.98.252.240" }, { id: "2", name: "Linell
-Humpherston", ip: "82.225.151.150" } ] const dataToConvert = { data:
-ipAddressesData, filename: 'ip_addresses_report', delimiter: ',', headers:
-['IP', "Full Name", "IP Address"] } ...
+Humpherston", ip: "82.225.151.150" } ]
 
-<button onClick="{()" ="">
-  jsonToCsvExport(dataToConvert)}> Download Data
-</button>
+ <button onClick={() => jsonToCsvExport({
+    data: ipAddressesData,
+    filename: 'ip_addresses_report',
+    delimiter: ',',
+    headers:['IP', "Full Name", "IP Address"]
+})}>
+      Download Data
+    </button>
+ 
 ```
 
 ## Properties
