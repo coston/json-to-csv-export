@@ -92,4 +92,23 @@ describe("csvDownload", () => {
       )
     ).toBeTruthy();
   });
+
+  test("headers order is respected", async () => {
+    const customHeaders = ["First Name", "Email", "Last Name", "id"];
+    csvDownload({
+      data: mockData,
+      headers: customHeaders,
+      filename: "ordered-headers",
+      delimiter: ",",
+    });
+    expect(link.download).toEqual("ordered-headers.csv");
+    expect(capturedBlob).not.toBe(null);
+    const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
+    expect(
+      generatedCsvString.startsWith(`First Name,Email,Last Name,id`)
+    ).toBeTruthy();
+    expect(
+      generatedCsvString.includes(`Blanch,belby0@bing.com,Elby,1`)
+    ).toBeTruthy();
+  });
 });
