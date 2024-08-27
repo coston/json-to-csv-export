@@ -1,4 +1,4 @@
-# ⌗ json-to-csv-export
+# ⬇️ json-to-csv-export
 
 A function to easily generate csv downloads of your json data. ✨
 
@@ -28,7 +28,7 @@ Install with npm:
 npm i json-to-csv-export
 ```
 
-Or load from a CDN:
+or load from a CDN:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/json-to-csv-export"></script>
@@ -36,22 +36,35 @@ Or load from a CDN:
 
 ## Example Usage
 
-```html
-import jsonToCsvExport from 'json-to-csv-export'
+```jsx
+// import jsonToCsvExport from "json-to-csv-export";
 
-const ipAddressesData = [ { id:
-"1", name: "Sarajane Wheatman", ip: "40.98.252.240" }, { id: "2", name: "Linell
-Humpherston", ip: "82.225.151.150" } ]
+() => {
+  const mockData = [
+    {
+      ID: 1,
+      "First Name": "Sarajane",
+      "Last Name": "Wheatman",
+      Email: "swheatman0@google.nl",
+      Language: "Zulu",
+      "IP Address": "40.98.252.240",
+    },
+    {
+      ID: 2,
+      "First Name": "Linell",
+      "Last Name": "Humpherston",
+      Email: "lhumpherston1@google.com.br",
+      Language: "Czech",
+      "IP Address": "82.225.151.150",
+    },
+  ];
 
- <button onClick={() => jsonToCsvExport({
-    data: ipAddressesData,
-    filename: 'ip_addresses_report',
-    delimiter: ',',
-    headers:['IP', "Full Name", "IP Address"]
-})}>
+  return (
+    <button onClick={() => jsonToCsvExport({ data: mockData })}>
       Download Data
     </button>
- 
+  );
+};
 ```
 
 ## Properties
