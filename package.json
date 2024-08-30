@@ -8,7 +8,7 @@
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
-  "author": "Coston Perkins <coston.perkins@ua.edu> (https://coston.io)",
+  "author": "Coston Perkins (https://coston.io)",
   "homepage": "https://github.com/coston/json-to-csv-export",
   "repository": {
     "type": "git",
