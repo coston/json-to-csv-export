@@ -1,7 +1,7 @@
 export const csvGenerateRow = (
   row: any,
   headerKeys: string[],
-  delimiter: string
+  delimiter: string,
 ) => {
   const needsQuoteWrapping = new RegExp(`["${delimiter}\r\n]`);
   return headerKeys
@@ -43,7 +43,7 @@ const getAllUniqueKeys = (data: any[]): string[] => {
 export const csvGenerate = (
   data: any[],
   headers: string[] | undefined,
-  delimiter: string
+  delimiter: string,
 ) => {
   const headerKeys = headers ?? getAllUniqueKeys(data);
   const csv = data.map((row) => csvGenerateRow(row, headerKeys, delimiter));
