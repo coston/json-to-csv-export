@@ -1,6 +1,6 @@
-const jsonToCsvExport = require("./lib/esm");
+import jsonToCsvExport from "./lib/esm";
 
-module.exports = {
+export default {
   color: "#ADD8E6",
   packageName: "json-to-csv-export",
   description: "Easily generate csv downloads of your json data.",
