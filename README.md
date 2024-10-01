@@ -71,6 +71,7 @@ or load from a CDN:
 
 ```jsx
 // import jsonToCsvExport from "json-to-csv-export";
+() => {
   const mockData = [
     {
       id: 1,
@@ -104,6 +105,7 @@ or load from a CDN:
       Download Data
     </button>
   );
+  };
 ```
 
 
