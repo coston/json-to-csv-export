@@ -132,7 +132,6 @@ describe("csvDownload", () => {
     expect(link.download).toEqual("test-customHeaders.csv");
     expect(capturedBlob).not.toBe(null);
     const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
-    console.log(generatedCsvString);
     expect(
       generatedCsvString.startsWith(`First Name Label,Last Name Label,Email Address Label,Gender Label,IP Address Label`)
     ).toBeTruthy();
