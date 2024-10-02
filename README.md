@@ -105,11 +105,8 @@ or load from a CDN:
       Download Data
     </button>
   );
-  };
+};
 ```
-
-
-
 
 ## Properties
 
@@ -120,13 +117,12 @@ interface HeaderMapping {
 }
 ```
 
-
-| # | Property  | Type                             | Requirement | Default                   | Description                                                                              |
-| - | --------- | -------------------------------- | ----------- | ------------------------- | ---------------------------------------------------------------------------------------- |
-| 1 | data      | []                               | required    |                           | array of objects                                                                         |
-| 2 | filename  | string                           | optional    | "export.csv"              | The filename. The .csv extention will be added if not included in file name              |
-| 3 | delimiter | string                           | optional    | ","                       | fields separator                                                                         |
-| 4 | headers   | string[] OR<br />HeaderMapping[] | optional    | provided data object keys | List of columns that will be used in the final CSV file. Recommended for large datasets! |
+| #   | Property  | Type                          | Requirement | Default      | Description                                                                 |
+| --- | --------- | ----------------------------- | ----------- | ------------ | --------------------------------------------------------------------------- |
+| 1   | data      | `Record<string, any>[]`       | required    |              | array of objects                                                            |
+| 2   | filename  | `string`                      | optional    | "export.csv" | The filename. The .csv extention will be added if not included in file name |
+| 3   | delimiter | `string`                      | optional    | ","          | fields separator                                                            |
+| 4   | headers   | `string[]`, `HeaderMapping[]` | optional    |              | provided data object keys                                                   |
 
 ## Migration from version 1.x to 2.x
 
