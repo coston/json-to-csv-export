@@ -67,14 +67,66 @@ or load from a CDN:
 };
 ```
 
+## Example with Header mapping
+
+```jsx
+// import jsonToCsvExport from "json-to-csv-export";
+() => {
+  const mockData = [
+    {
+      id: 1,
+      firstName: "Sarajane",
+      lastName: "Wheatman",
+      email: "swheatman0@google.nl",
+      language: "Zulu",
+      ip: "40.98.252.240",
+    },
+    {
+      id: 2,
+      firstName: "Linell",
+      lastName: "Humpherston",
+      email: "lhumpherston1@google.com.br",
+      language: "Czech",
+      ip: "82.225.151.150",
+    },
+  ];
+
+  const headers = [
+    { key: "id", label: "Identifier" },
+    { key: "firstName", label: "First Name" },
+    { key: "lastName", label: "Last Name" },
+    { key: "email", label: "Email Address" },
+    { key: "language", label: "Language" },
+    { key: "ip", label: "IP Address" },
+  ];
+
+  return (
+    <button onClick={() => jsonToCsvExport({ data: mockData, headers })}>
+      Download Data
+    </button>
+  );
+  };
+```
+
+
+
+
 ## Properties
 
-| #   | Property  | Type     | Requirement | Default                   | Description                                                                              |
-| --- | --------- | -------- | ----------- | ------------------------- | ---------------------------------------------------------------------------------------- |
-| 1   | data      | []       | required    |                           | array of objects                                                                         |
-| 2   | filename  | string   | optional    | "export.csv"              | The filename. The .csv extention will be added if not included in file name              |
-| 3   | delimiter | string   | optional    | ","                       | fields separator                                                                         |
-| 4   | headers   | string[] | optional    | provided data object keys | List of columns that will be used in the final CSV file. Recommended for large datasets! |
+```typescript
+interface HeaderMapping {
+  label: string;
+  key: string;
+}
+```
+
+
+| # | Property  | Type                             | Requirement | Default                   | Description                                                                              |
+| - | --------- | -------------------------------- | ----------- | ------------------------- | ---------------------------------------------------------------------------------------- |
+| 1 | data      | []                               | required    |                           | array of objects                                                                         |
+| 2 | filename  | string                           | optional    | "export.csv"              | The filename. The .csv extention will be added if not included in file name              |
+| 3 | delimiter | string                           | optional    | ","                       | fields separator                                                                         |
+| 4 | headers   | string[] OR<br />HeaderMapping[] | optional    | provided data object keys | List of columns that will be used in the final CSV file. Recommended for large datasets! |
 
 ## Migration from version 1.x to 2.x
 

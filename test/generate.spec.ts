@@ -1,3 +1,4 @@
+import { HeaderMapping } from "../src";
 import { csvGenerateRow, csvGenerate } from "../src/generate";
 
 describe("csvGenerateRow", () => {
@@ -102,5 +103,20 @@ describe("csvGenerate", () => {
     expect(csvGenerate(mockData, ["id", "name", "age"], ",")).toEqual(
       expectedCsv
     );
+  });
+
+  test("generates CSV with HeaderMapping", () => {
+    const mockData = [
+      { id: 1, name: "Alice", age: null },
+      { id: 2, name: "Bob", age: undefined },
+      { id: 3, name: "Charlie", age: "" },
+    ];
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Full Name" },
+      { key: "age", label: "Age" },
+    ];
+    const expectedCsv = `ID,Full Name,Age\r\n1,Alice,\r\n2,Bob,\r\n3,Charlie,`;
+    expect(csvGenerate(mockData, headers, ",")).toEqual(expectedCsv);
   });
 });

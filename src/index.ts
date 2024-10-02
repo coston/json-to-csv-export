@@ -1,11 +1,15 @@
 import { csvGenerate } from "./generate";
+export interface HeaderMapping {
+  label: string;
+  key: string;
+}
 
 interface CsvDownloadProps {
   data: any[];
   filename?: string;
   /** Cell delimiter to use. Defaults to comma for RFC-4180 compliance. */
   delimiter?: string;
-  headers?: string[];
+  headers?: string[] | HeaderMapping[];
 }
 
 const CSV_FILE_TYPE = "text/csv;charset=utf-8;";
@@ -20,7 +24,7 @@ const csvDownload = ({
 
   if (data.length === 0) {
     triggerCsvDownload(
-      headers ? headers.join(delimiter) : "",
+      headers ? headers.map(h => typeof h === "string" ? h : h.label).join(delimiter) : "",
       formattedFilename,
     );
     return;
@@ -32,7 +36,6 @@ const csvDownload = ({
 };
 
 const triggerCsvDownload = (csvAsString: string, fileName: string) => {
-  // BOM support for special characters in Excel
   const byteOrderMark = "\ufeff";
 
   const blob = new Blob([byteOrderMark, csvAsString], {
