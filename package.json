@@ -1,6 +1,6 @@
 {
   "name": "json-to-csv-export",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Easily generate csv downloads of your json data.",
   "files": [
     "/lib"
