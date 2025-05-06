@@ -1,6 +1,9 @@
 {
   "name": "json-to-csv-export",
   "version": "3.0.0",
+  "jsdelivr": "./lib/umd/index.js",
+  "unpkg": "./lib/umd/index.js",
+  "browser": "./lib/umd/index.js",
   "description": "Easily generate csv downloads of your json data.",
   "files": [
     "/lib"
@@ -22,7 +25,8 @@
     "node": ">=12.17.0"
   },
   "scripts": {
-    "build": "npm run build:esm && npm run build:cjs",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:umd",
+    "build:umd": "tsc --project tsconfig.umd.json",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "build:esm": "tsc",
     "clean": "rm -rf lib",
