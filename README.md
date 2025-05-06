@@ -28,12 +28,6 @@ Install with npm:
 npm i json-to-csv-export
 ```
 
-or load from a CDN:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/json-to-csv-export"></script>
-```
-
 ## Example Usage
 
 ```jsx
