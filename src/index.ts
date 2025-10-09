@@ -24,7 +24,11 @@ const csvDownload = ({
 
   if (data.length === 0) {
     triggerCsvDownload(
-      headers ? headers.map(h => typeof h === "string" ? h : h.label).join(delimiter) : "",
+      headers
+        ? headers
+            .map((h) => (typeof h === "string" ? h : h.label))
+            .join(delimiter)
+        : "",
       formattedFilename,
     );
     return;
@@ -48,7 +52,7 @@ const triggerCsvDownload = (csvAsString: string, fileName: string) => {
   link.style.display = "none";
   document.body.appendChild(link);
   link.click();
-  if (link.href.startsWith('blob:')) {
+  if (link.href.startsWith("blob:")) {
     URL.revokeObjectURL(link.href);
   }
   document.body.removeChild(link);

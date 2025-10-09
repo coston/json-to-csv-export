@@ -1,6 +1,5 @@
 import { HeaderMapping } from ".";
 
-
 export const csvGenerateRow = (
   row: any,
   headerKeys: string[] | HeaderMapping[],
@@ -17,7 +16,7 @@ export const csvGenerateRow = (
       if (typeof value !== "string") {
         value = String(value);
       }
-       /* RFC-4180
+      /* RFC-4180
       6.  Fields containing line breaks (CRLF), double quotes, and commas should be enclosed in double-quotes.
       7.  If double-quotes are used to enclose fields, then a double-quote inside a field must be escaped by preceding it with
        another double quote. For example: "aaa","b""bb","ccc"
@@ -51,7 +50,7 @@ export const csvGenerate = (
 ) => {
   const headerKeys = headers ?? getAllUniqueKeys(data);
   const headerRow = headerKeys.map((header) =>
-    typeof header === "string" ? header : header.label
+    typeof header === "string" ? header : header.label,
   );
   const csv = data.map((row) => csvGenerateRow(row, headerKeys, delimiter));
 
