@@ -48,6 +48,9 @@ const triggerCsvDownload = (csvAsString: string, fileName: string) => {
   link.style.display = "none";
   document.body.appendChild(link);
   link.click();
+  if (link.href.startsWith('blob:')) {
+    URL.revokeObjectURL(link.href);
+  }
   document.body.removeChild(link);
 };
 
