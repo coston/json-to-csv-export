@@ -111,12 +111,13 @@ interface HeaderMapping {
 }
 ```
 
-| #   | Property  | Type                          | Requirement | Default      | Description                                                                 |
-| --- | --------- | ----------------------------- | ----------- | ------------ | --------------------------------------------------------------------------- |
-| 1   | data      | `Record<string, any>[]`       | required    |              | array of objects                                                            |
-| 2   | filename  | `string`                      | optional    | "export.csv" | The filename. The .csv extention will be added if not included in file name |
-| 3   | delimiter | `string`                      | optional    | ","          | fields separator                                                            |
-| 4   | headers   | `string[]`, `HeaderMapping[]` | optional    |              | provided data object keys                                                   |
+| #   | Property    | Type                          | Requirement | Default      | Description                                                                 |
+| --- | ----------- | ----------------------------- | ----------- | ------------ | --------------------------------------------------------------------------- |
+| 1   | data        | `Record<string, any>[]`       | required    |              | array of objects                                                            |
+| 2   | filename    | `string`                      | optional    | "export.csv" | The filename. The .csv extention will be added if not included in file name |
+| 3   | delimiter   | `string`                      | optional    | ","          | fields separator                                                            |
+| 4   | headers     | `string[]`, `HeaderMapping[]` | optional    |              | provided data object keys                                                   |
+| 5   | omitHeaders | `boolean`                     | optional    | false        | Leave the header row out of the generated file                             |
 
 ## Migration from version 1.x to 2.x
 
