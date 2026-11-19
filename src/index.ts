@@ -10,6 +10,8 @@ interface CsvDownloadProps {
   /** Cell delimiter to use. Defaults to comma for RFC-4180 compliance. */
   delimiter?: string;
   headers?: string[] | HeaderMapping[];
+  /** Leave the header row out of the generated file. Defaults to false. */
+  omitHeaders?: boolean;
 }
 
 const CSV_FILE_TYPE = "text/csv;charset=utf-8;";
@@ -19,10 +21,11 @@ const csvDownload = ({
   filename = "export.csv",
   delimiter = ",",
   headers,
+  omitHeaders = false,
 }: CsvDownloadProps): void => {
   const formattedFilename = getFilename(filename);
 
-  const csvAsString = csvGenerate(data, headers, delimiter);
+  const csvAsString = csvGenerate(data, headers, delimiter, omitHeaders);
 
   triggerCsvDownload(csvAsString, formattedFilename);
 };

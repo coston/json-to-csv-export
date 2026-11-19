@@ -4,7 +4,7 @@ import mockData from "./__mocks__/mockData";
 // current version of JSDom doesn't support Blob.text(), so this is a FileReader-based workaround.
 const getBlobAsText = async (
   blob: Blob,
-  encoding = "text/csv;charset=utf-8;"
+  encoding = "text/csv;charset=utf-8;",
 ): Promise<string> => {
   const fileReader = new FileReader();
   return new Promise((resolve) => {
@@ -57,6 +57,17 @@ describe("csvDownload", () => {
     expect(generatedCsvString).toEqual(`ID,"Name, full"`);
   });
 
+  test("downloads only the byte order mark when data is empty and omitHeaders is true", async () => {
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Name, full" },
+    ];
+    csvDownload({ data: [], headers, omitHeaders: true });
+    expect(capturedBlob).not.toBe(null);
+    const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
+    expect(generatedCsvString).toEqual("");
+  });
+
   test("with data, using comma delimiter as default", async () => {
     csvDownload({ data: mockData });
     expect(link.href).toContain("test/url");
@@ -65,13 +76,13 @@ describe("csvDownload", () => {
     const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
     expect(
       generatedCsvString.startsWith(
-        `id,First Name,Last Name,Email,Gender,IP Address`
-      )
+        `id,First Name,Last Name,Email,Gender,IP Address`,
+      ),
     ).toBeTruthy();
     expect(
       generatedCsvString.includes(
-        `1,Blanch,Elby,belby0@bing.com,Female,112.81.107.207`
-      )
+        `1,Blanch,Elby,belby0@bing.com,Female,112.81.107.207`,
+      ),
     ).toBeTruthy();
   });
 
@@ -94,13 +105,13 @@ describe("csvDownload", () => {
     const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
     expect(
       generatedCsvString.startsWith(
-        `id;First Name;Last Name;Email;Gender;IP Address`
-      )
+        `id;First Name;Last Name;Email;Gender;IP Address`,
+      ),
     ).toBeTruthy();
     expect(
       generatedCsvString.includes(
-        `1;Blanch;Elby;belby0@bing.com;Female;112.81.107.207`
-      )
+        `1;Blanch;Elby;belby0@bing.com;Female;112.81.107.207`,
+      ),
     ).toBeTruthy();
   });
 
@@ -116,14 +127,14 @@ describe("csvDownload", () => {
     expect(capturedBlob).not.toBe(null);
     const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
     expect(
-      generatedCsvString.startsWith(`First Name,Email,Last Name,id`)
+      generatedCsvString.startsWith(`First Name,Email,Last Name,id`),
     ).toBeTruthy();
     expect(
-      generatedCsvString.includes(`Blanch,belby0@bing.com,Elby,1`)
+      generatedCsvString.includes(`Blanch,belby0@bing.com,Elby,1`),
     ).toBeTruthy();
   });
 
-  test("downloads CSV with HeaderMapping",async  () => {
+  test("downloads CSV with HeaderMapping", async () => {
     const headers: HeaderMapping[] = [
       { key: "First Name", label: "First Name Label" },
       { key: "Last Name", label: "Last Name Label" },
@@ -134,7 +145,6 @@ describe("csvDownload", () => {
 
     const expectedCsv = `First Name,Last Name,Email Address,Gender,IP Address\r\nPaulie,Steffens,psteffenso@washingtonpost.com,Female,115.83.208.158`;
 
-
     csvDownload({
       data: mockData,
       headers,
@@ -144,11 +154,14 @@ describe("csvDownload", () => {
     expect(capturedBlob).not.toBe(null);
     const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
     expect(
-      generatedCsvString.startsWith(`First Name Label,Last Name Label,Email Address Label,Gender Label,IP Address Label`)
+      generatedCsvString.startsWith(
+        `First Name Label,Last Name Label,Email Address Label,Gender Label,IP Address Label`,
+      ),
     ).toBeTruthy();
     expect(
-      generatedCsvString.includes(`Blanch,Elby,belby0@bing.com,Female,112.81.107.207`)
+      generatedCsvString.includes(
+        `Blanch,Elby,belby0@bing.com,Female,112.81.107.207`,
+      ),
     ).toBeTruthy();
-
   });
 });

@@ -49,14 +49,17 @@ export const csvGenerate = (
   data: any[],
   headers: string[] | HeaderMapping[] | undefined,
   delimiter: string,
+  omitHeaders = false,
 ) => {
   const headerKeys = headers ?? getAllUniqueKeys(data);
-  const headerRow = headerKeys.map((header) =>
-    quoteField(typeof header === "string" ? header : header.label, delimiter),
-  );
   const csv = data.map((row) => csvGenerateRow(row, headerKeys, delimiter));
 
-  csv.unshift(headerRow.join(delimiter));
+  if (!omitHeaders) {
+    const headerRow = headerKeys.map((header) =>
+      quoteField(typeof header === "string" ? header : header.label, delimiter),
+    );
+    csv.unshift(headerRow.join(delimiter));
+  }
 
   return csv.join("\r\n");
 };

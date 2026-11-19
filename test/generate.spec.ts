@@ -11,7 +11,7 @@ describe("csvGenerateRow", () => {
     };
 
     expect(
-      csvGenerateRow(mockData, ["id", "one", "two", "empty"], ",")
+      csvGenerateRow(mockData, ["id", "one", "two", "empty"], ","),
     ).toEqual(`0,true,false,`);
   });
 
@@ -22,7 +22,7 @@ describe("csvGenerateRow", () => {
     };
 
     expect(csvGenerateRow(mockData, ["id", "text"], ";")).toEqual(
-      `1;Lee Perry`
+      `1;Lee Perry`,
     );
   });
 
@@ -32,7 +32,7 @@ describe("csvGenerateRow", () => {
       text: 'Lee "Scratch" Perry',
     };
     expect(csvGenerateRow(mockData, ["id", "text"], ";")).toEqual(
-      `1;"Lee ""Scratch"" Perry"`
+      `1;"Lee ""Scratch"" Perry"`,
     );
   });
 
@@ -44,7 +44,7 @@ Perry  `,
     };
     expect(csvGenerateRow(mockData, ["id", "text"], ",")).toEqual(
       `1,"Lee
-Perry  "`
+Perry  "`,
     );
   });
 
@@ -54,7 +54,7 @@ Perry  "`
       text: "Bond; James Bond",
     };
     expect(csvGenerateRow(mockData, ["id", "text"], ";")).toEqual(
-      `1;"Bond; James Bond"`
+      `1;"Bond; James Bond"`,
     );
   });
 
@@ -65,7 +65,7 @@ Perry  "`
       location: "The Shire; Eriador",
     };
     expect(csvGenerateRow(mockData, ["id", "name", "location"], ",")).toEqual(
-      `1,"Baggins, Frodo",The Shire; Eriador`
+      `1,"Baggins, Frodo",The Shire; Eriador`,
     );
   });
 });
@@ -89,7 +89,7 @@ describe("csvGenerate", () => {
     ];
     const expectedCsv = `id,name,age\r\n1,Alice,\r\n2,,30\r\n3,Bob,25`;
     expect(csvGenerate(mockData, ["id", "name", "age"], ",")).toEqual(
-      expectedCsv
+      expectedCsv,
     );
   });
 
@@ -101,7 +101,7 @@ describe("csvGenerate", () => {
     ];
     const expectedCsv = `id,name,age\r\n1,Alice,\r\n2,Bob,\r\n3,Charlie,`;
     expect(csvGenerate(mockData, ["id", "name", "age"], ",")).toEqual(
-      expectedCsv
+      expectedCsv,
     );
   });
 
@@ -164,5 +164,44 @@ describe("csvGenerate", () => {
     const mockData = [{ "Name, full": "Doe, Jane" }];
     const expectedCsv = `"Name, full"\r\n"Doe, Jane"`;
     expect(csvGenerate(mockData, ["Name, full"], ",")).toEqual(expectedCsv);
+  });
+
+  test("includes the header row by default (omitHeaders absent)", () => {
+    const mockData = [{ id: 1, name: "Doe, Jane" }];
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Name" },
+    ];
+    const expectedCsv = `ID,Name\r\n1,"Doe, Jane"`;
+    expect(csvGenerate(mockData, headers, ",")).toEqual(expectedCsv);
+  });
+
+  test("includes the header row when omitHeaders is false", () => {
+    const mockData = [{ id: 1, name: "Doe, Jane" }];
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Name" },
+    ];
+    const expectedCsv = `ID,Name\r\n1,"Doe, Jane"`;
+    expect(csvGenerate(mockData, headers, ",", false)).toEqual(expectedCsv);
+  });
+
+  test("omits the header row for a HeaderMapping list when omitHeaders is true", () => {
+    const mockData = [{ id: 1, name: "Doe, Jane" }];
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Name" },
+    ];
+    expect(csvGenerate(mockData, headers, ",", true)).toEqual(`1,"Doe, Jane"`);
+  });
+
+  test("omits the header row when headers is undefined and omitHeaders is true", () => {
+    const mockData = [
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob" },
+    ];
+    expect(csvGenerate(mockData, undefined, ",", true)).toEqual(
+      `1,Alice\r\n2,Bob`,
+    );
   });
 });
