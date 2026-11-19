@@ -46,6 +46,17 @@ describe("csvDownload", () => {
     csvDownload({ data: [] });
   });
 
+  test("downloads a quoted header when data is empty and a label contains a comma", async () => {
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Name, full" },
+    ];
+    csvDownload({ data: [], headers });
+    expect(capturedBlob).not.toBe(null);
+    const generatedCsvString = await getBlobAsText(capturedBlob as Blob);
+    expect(generatedCsvString).toEqual(`ID,"Name, full"`);
+  });
+
   test("with data, using comma delimiter as default", async () => {
     csvDownload({ data: mockData });
     expect(link.href).toContain("test/url");
