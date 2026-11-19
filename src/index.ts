@@ -22,18 +22,6 @@ const csvDownload = ({
 }: CsvDownloadProps): void => {
   const formattedFilename = getFilename(filename);
 
-  if (data.length === 0) {
-    triggerCsvDownload(
-      headers
-        ? headers
-            .map((h) => (typeof h === "string" ? h : h.label))
-            .join(delimiter)
-        : "",
-      formattedFilename,
-    );
-    return;
-  }
-
   const csvAsString = csvGenerate(data, headers, delimiter);
 
   triggerCsvDownload(csvAsString, formattedFilename);

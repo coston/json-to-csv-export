@@ -119,4 +119,50 @@ describe("csvGenerate", () => {
     const expectedCsv = `ID,Full Name,Age\r\n1,Alice,\r\n2,Bob,\r\n3,Charlie,`;
     expect(csvGenerate(mockData, headers, ",")).toEqual(expectedCsv);
   });
+
+  test("quotes a HeaderMapping label containing the delimiter", () => {
+    const mockData = [{ id: 1, name: "Doe, Jane" }];
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Name, full" },
+    ];
+    const expectedCsv = `ID,"Name, full"\r\n1,"Doe, Jane"`;
+    expect(csvGenerate(mockData, headers, ",")).toEqual(expectedCsv);
+  });
+
+  test("quotes a HeaderMapping label containing a double quote", () => {
+    const mockData = [{ first: "Doe, Jane", size: "x" }];
+    const headers: HeaderMapping[] = [
+      { key: "first", label: "Last, First" },
+      { key: "size", label: 'Size (5")' },
+    ];
+    const expectedCsv = `"Last, First","Size (5"")"\r\n"Doe, Jane",x`;
+    expect(csvGenerate(mockData, headers, ",")).toEqual(expectedCsv);
+  });
+
+  test("quotes a HeaderMapping label containing a CRLF", () => {
+    const mockData = [{ id: 1, name: "Alice" }];
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Full\r\nName" },
+    ];
+    const expectedCsv = `ID,"Full\r\nName"\r\n1,Alice`;
+    expect(csvGenerate(mockData, headers, ",")).toEqual(expectedCsv);
+  });
+
+  test("leaves a comma-containing label unquoted when the delimiter is a semicolon", () => {
+    const mockData = [{ id: 1, name: "Alice" }];
+    const headers: HeaderMapping[] = [
+      { key: "id", label: "ID" },
+      { key: "name", label: "Name, full" },
+    ];
+    const expectedCsv = `ID;Name, full\r\n1;Alice`;
+    expect(csvGenerate(mockData, headers, ";")).toEqual(expectedCsv);
+  });
+
+  test("quotes a string header (keys-as-headers) containing the delimiter", () => {
+    const mockData = [{ "Name, full": "Doe, Jane" }];
+    const expectedCsv = `"Name, full"\r\n"Doe, Jane"`;
+    expect(csvGenerate(mockData, ["Name, full"], ",")).toEqual(expectedCsv);
+  });
 });
